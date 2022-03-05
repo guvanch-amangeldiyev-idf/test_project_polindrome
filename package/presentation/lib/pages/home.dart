@@ -1,8 +1,8 @@
-import 'package:domain/usecases/base_impl.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/state_man/data/bloc_state.dart';
-import 'package:presentation/state_man/home_bloc.dart';
-import 'package:presentation/state_man/data/home_data.dart';
+import 'package:presentation/bloc/base/bloc_data.dart';
+import 'package:presentation/bloc/base/bloc_state.dart';
+import 'package:presentation/bloc/home_bloc.dart';
+import 'package:presentation/bloc/home_data.dart';
 import 'package:presentation/widgets/text_field.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,8 +14,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState<A> extends State<MyHomePage> {
-  HomeBloc bloc = HomeBloc(PalindromeUseCase());
+class _MyHomePageState<A> extends BlocState<MyHomePage, HomeBloc> {
+  //HomeBloc bloc = HomeBloc(PalindromeUseCase());
 
   void _incrementCounter() {
     bloc.checkPalindrome();
@@ -41,14 +41,19 @@ class _MyHomePageState<A> extends State<MyHomePage> {
             if (blocData is BlocData) {
               final screenData = blocData.data;
               if (blocData.isloading) {
-                return _BuildComputation();
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
               } else if (screenData is HomeData) {
-                return _BuildResult(screenData: screenData,bloc: bloc,);
+                return _BuildResult(
+                  screenData: screenData,
+                  bloc: bloc,
+                );
               } else {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             } else {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
           }),
       floatingActionButton: FloatingActionButton(
@@ -59,9 +64,6 @@ class _MyHomePageState<A> extends State<MyHomePage> {
     );
   }
 }
-
-
-
 
 class _BuildResult extends StatelessWidget {
   const _BuildResult({
@@ -75,30 +77,13 @@ class _BuildResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextFieldOfPolindrome(onChanged: bloc.setPalindromeString),
-            Text('Is palindrome=${screenData.isPalindromeOrNot}'),
-          ],
-        ),
-      );
-  }
-}
-
-
-class _BuildComputation extends StatelessWidget {
-  const _BuildComputation({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text('Waiting for a result'),
-          ],
-        ),
-      );
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          TextFieldOfPolindrome(onChanged: bloc.setPalindromeString),
+          Text('Is palindrome=${screenData.isPalindromeOrNot}'),
+        ],
+      ),
+    );
   }
 }
