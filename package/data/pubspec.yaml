@@ -1,5 +1,5 @@
-name: domain
-description: domain layer
+name: data
+description: Data layer
 publish_to: none
 
 environment:
@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  meta: ^1.7.0
+  domain:
+    path: ../domain
 
 dev_dependencies:
   flutter_lints: ^1.0.0

@@ -50,10 +50,17 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  data:
+    dependency: transitive
+    description:
+      path: "package/data"
+      relative: true
+    source: path
+    version: "0.0.0"
   domain:
     dependency: transitive
     description:
-      path: "package/polindrome/domain"
+      path: "package/domain"
       relative: true
     source: path
     version: "0.0.0"
@@ -81,6 +88,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get_it:
+    dependency: transitive
+    description:
+      name: get_it
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.2.0"
   lints:
     dependency: transitive
     description:
@@ -119,7 +133,7 @@ packages:
   presentation:
     dependency: "direct main"
     description:
-      path: "package/polindrome/presentation"
+      path: "package/presentation"
       relative: true
     source: path
     version: "0.0.0"
