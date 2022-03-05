@@ -1,11 +1,7 @@
-import 'package:domain/usecases/base_impl.dart';
 import 'package:get_it/get_it.dart';
-import 'package:presentation/bloc/home_bloc.dart';
+import 'package:injectable/injectable.dart';
 
-void initHomeScreenModule() async {
-  _initHomeScreenModule();
-}
+import 'screen_injection.config.dart';
 
-void _initHomeScreenModule() {
-  GetIt.I.registerFactory(() => HomeBloc(GetIt.I.get<PalindromeUseCase>()));
-}
+@InjectableInit()
+void configurePresentationDependencies(GetIt getIt) => $initGetIt(getIt);
